@@ -1,0 +1,220 @@
+--- 1. Engine identity -----------------------------------------		--- 1. Engine identity -----------------------------------------
+                                                      version                 |	                                         version                             
+----------------------------------------------------------------------------- |	-----------------------------------------------------------------------------
+ PostgreSQL 17.9 (Debian 17.9-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by |	 PostgreSQL 17.9 on x86_64-pc-linux-gnu, compiled by Debian clang version 12.
+(1 row)										(1 row)
+
+--- 2. Google / AlloyDB-specific extensions available -----------		--- 2. Google / AlloyDB-specific extensions available -----------
+ name | default_version | comment 					      |	            name             | default_version |                      comment
+------+-----------------+---------					      |	-----------------------------+-----------------+-----------------------------
+(0 rows)								      |	 alloydb_ai_nl               | 1.1.0           | Google Extension for AlloyDB
+									      >	 alloydb_password_validation | 1.0             | Google AlloyDB password vali
+									      >	 alloydb_scann               | 0.1.4           | AlloyDB ScaNN Search
+									      >	 alloydbg                    | 1.0             | Alloy Core Dump Debug Tool
+									      >	 google_columnar_engine      | 1.0             | Google extension for columna
+									      >	 google_db_advisor           | 1.1             | Google extension for Databas
+									      >	 google_insights             | 1.5             | Google extension for databas
+									      >	 google_job_scheduler        | 1.0             | Google extension for Job Sch
+									      >	 google_ml_integration       | 1.6             | Google extension for ML inte
+									      >	 google_pg_auth              | 1.0             | Handle authentication and au
+									      >	 google_plan_management      | 1.0             | Google Extension for Plan Ma
+									      >	 google_storage              | 1.1             | Google storage access optimi
+									      >	(12 rows)
+
+--- 3. Extensions actually installed in this database ------------		--- 3. Extensions actually installed in this database ------------
+                 List of installed extensions				      |	                             List of installed extensions
+  Name   | Version |   Schema   |         Description          		      |	          Name          | Version |   Schema   |              Description    
+---------+---------+------------+------------------------------		      |	------------------------+---------+------------+-----------------------------
+ plpgsql | 1.0     | pg_catalog | PL/pgSQL procedural language		      |	 google_columnar_engine | 1.0     | public     | Google extension for columna
+(1 row)									      |	 google_db_advisor      | 1.1     | public     | Google extension for Databas
+									      >	 google_ml_integration  | 1.6     | public     | Google extension for ML inte
+									      >	 hypopg                 | 1.3.2   | public     | Hypothetical indexes for Pos
+									      >	 plpgsql                | 1.0     | pg_catalog | PL/pgSQL procedural language
+									      >	(5 rows)
+
+--- 4. vector search extensions available (pgvector etc.) --------		--- 4. vector search extensions available (pgvector etc.) --------
+ name | default_version | comment 					      |	     name      | default_version |                       comment             
+------+-----------------+---------					      |	---------------+-----------------+-------------------------------------------
+(0 rows)								      |	 vector        | 0.8.2.google-1  | vector data type and ivfflat and hnsw acce
+									      >	 vector_assist | 0.1.0           | extension for assistive operational toolin
+									      >	(2 rows)
+
+--- 5. Columnar-engine related GUCs (settings) --------------------		--- 5. Columnar-engine related GUCs (settings) --------------------
+ name | setting | short_desc 						      |	                                  name                                  |  se
+------+---------+------------						      |	------------------------------------------------------------------------+----
+(0 rows)								      |	 google_columnar_engine.adaptive_auto_refresh_schedule                  |    
+									      >	 google_columnar_engine.allow_parallel_plan_on_vec_join                 | off
+									      >	 google_columnar_engine.auto_columnarization_schedule                   |    
+									      >	 google_columnar_engine.enable_aggregate_distinct_in_aggregate_pushdown | off
+									      >	 google_columnar_engine.enable_auto_columnarization                     | on 
+									      >	 google_columnar_engine.enable_auto_columnarization_storage_cache_spill | on 
+									      >	 google_columnar_engine.enable_background_processing_for_all_jobs       | off
+									      >	 google_columnar_engine.enable_columnar_scan                            | on 
+									      >	 google_columnar_engine.enable_configuration_persistence                | off
+									      >	 google_columnar_engine.enable_hashed_inlist                            | off
+									      >	 google_columnar_engine.enable_iceberg_reads                            | off
+									      >	 google_columnar_engine.enable_inverted_index                           | off
+									      >	 google_columnar_engine.enable_select_distinct_in_aggregate_pushdown    | on 
+									      >	 google_columnar_engine.enabled                                         | off
+									      >	 google_columnar_engine.heap_fragmentation_max_percentage               | 1  
+									      >	 google_columnar_engine.hot_chain_handling_option                       | no_
+									      >	 google_columnar_engine.max_non_toasted_column_size                     | 204
+									      >	 google_columnar_engine.memory_size_in_mb                               | 102
+									      >	 google_columnar_engine.omni_storage_cache_directory                    |    
+									      >	 google_columnar_engine.parallel_distinct_aggregate_pushdown_threshold  | 1  
+									      >	 google_columnar_engine.refresh_threshold_percentage                    | 25 
+									      >	 google_columnar_engine.refresh_threshold_scan_count                    | 5  
+									      >	 google_columnar_engine.refresh_threshold_scan_count_by_costing         | 20 
+									      >	 google_columnar_engine.relations                                       |    
+									      >	 google_columnar_engine.scan_mode                                       | 0  
+									      >	 google_columnar_engine.storage_cache_shared_percentage_max             | 50 
+									      >	 google_columnar_engine.storage_cache_size                              | -1 
+									      >	 google_columnar_engine.storage_cache_size_min                          | 102
+									      >	 google_columnar_engine.storage_uri                                     |    
+									      >	(29 rows)
+
+--- 6. Autovacuum related GUCs (look for adaptive/auto-tuning) ----		--- 6. Autovacuum related GUCs (look for adaptive/auto-tuning) ----
+                 name                  |  setting  |                          |	                          name                           |  setting  |       
+---------------------------------------+-----------+------------------------- |	---------------------------------------------------------+-----------+-------
+ autovacuum                            | on        | Starts the autovacuum su |	 autovacuum                                              | on        | Starts
+ autovacuum_analyze_scale_factor       | 0.1       | Number of tuple inserts, |	 autovacuum_analyze_scale_factor                         | 0.1       | Number
+ autovacuum_analyze_threshold          | 50        | Minimum number of tuple  |	 autovacuum_analyze_threshold                            | 50        | Minimu
+ autovacuum_freeze_max_age             | 200000000 | Age at which to autovacu |	 autovacuum_freeze_max_age                               | 200000000 | Age at
+ autovacuum_max_workers                | 3         | Sets the maximum number  |	 autovacuum_max_workers                                  | 3         | Sets t
+ autovacuum_multixact_freeze_max_age   | 400000000 | Multixact age at which t |	 autovacuum_multixact_freeze_max_age                     | 400000000 | Multix
+ autovacuum_naptime                    | 60        | Time to sleep between au |	 autovacuum_naptime                                      | 60        | Time t
+ autovacuum_vacuum_cost_delay          | 2         | Vacuum cost delay in mil |	 autovacuum_vacuum_cost_delay                            | 2         | Vacuum
+ autovacuum_vacuum_cost_limit          | -1        | Vacuum cost amount avail |	 autovacuum_vacuum_cost_limit                            | -1        | Vacuum
+ autovacuum_vacuum_insert_scale_factor | 0.2       | Number of tuple inserts  |	 autovacuum_vacuum_insert_scale_factor                   | 0.2       | Number
+ autovacuum_vacuum_insert_threshold    | 1000      | Minimum number of tuple  |	 autovacuum_vacuum_insert_threshold                      | 1000      | Minimu
+ autovacuum_vacuum_scale_factor        | 0.2       | Number of tuple updates  |	 autovacuum_vacuum_scale_factor                          | 0.2       | Number
+ autovacuum_vacuum_threshold           | 50        | Minimum number of tuple  |	 autovacuum_vacuum_threshold                             | 50        | Minimu
+ autovacuum_work_mem                   | -1        | Sets the maximum memory  |	 autovacuum_work_mem                                     | -1        | Sets t
+ log_autovacuum_min_duration           | 600000    | Sets the minimum executi |	 enable_google_adaptive_autovacuum                       | on        | Enable
+(15 rows)								      |	 enable_google_adaptive_autovacuum_delay_by_system_usage | on        | Enable
+									      >	 log_autovacuum_min_duration                             | 600000    | Sets t
+									      >	(17 rows)
+
+--- 7. Memory-management related GUCs ------------------------------		--- 7. Memory-management related GUCs ------------------------------
+               name               | setting |                                 |	                   name                    | setting |                       
+----------------------------------+---------+-------------------------------- |	-------------------------------------------+---------+-----------------------
+ dynamic_shared_memory_type       | posix   | Selects the dynamic shared memo |	 dynamic_shared_memory_max_socket_backlog  | 10      | The socket backlog lim
+ min_dynamic_shared_memory        | 0       | Amount of dynamic shared memory |	 dynamic_shared_memory_type                | posix   | Selects the dynamic sh
+ shared_memory_size               | 143     | Shows the size of the server's  |	 google_columnar_engine.memory_size_in_mb  | 1024    | Sets the size (in MB) 
+ shared_memory_size_in_huge_pages | 72      | Shows the number of huge pages  |	 google_ml_integration.max_memory_usage_mb | 2048    | Maximum memory usage i
+ shared_memory_type               | mmap    | Selects the shared memory imple |	 min_dynamic_shared_memory                 | 0       | Amount of dynamic shar
+(5 rows)								      |	 shared_memory_expand_ratio                | 0.25    | Sets the ratio that sh
+									      >	 shared_memory_size                        | 681     | Shows the size of the 
+									      >	 shared_memory_size_in_huge_pages          | 341     | Shows the number of hu
+									      >	 shared_memory_type                        | mmap    | Selects the shared mem
+									      >	(9 rows)
+
+--- 8. Index-advisor related objects --------------------------------		--- 8. Index-advisor related objects --------------------------------
+ name | default_version | comment 					      |	       name        | default_version |                comment                
+------+-----------------+---------					      |	-------------------+-----------------+---------------------------------------
+(0 rows)								      |	 google_db_advisor | 1.1             | Google extension for Database Advisor
+									      >	(1 row)
+
+--- 9. Full list of every available extension (for a manual diff) --		--- 9. Full list of every available extension (for a manual diff) --
+        name        | default_version 					      |	            name             | default_version 
+--------------------+-----------------					      |	-----------------------------+-----------------
+ amcheck            | 1.4						      |	 alloydb_ai_nl               | 1.1.0
+ autoinc            | 1.0						      |	 alloydb_password_validation | 1.0
+ bloom              | 1.0						      |	 alloydb_scann               | 0.1.4
+ btree_gin          | 1.3						      |	 alloydbg                    | 1.0
+ btree_gist         | 1.7						      |	 amcheck                     | 1.4
+ citext             | 1.6						      |	 anon                        | 1.0.0
+ cube               | 1.5						      |	 autoinc                     | 1.0
+ dblink             | 1.2						      |	 bloom                       | 1.0
+ dict_int           | 1.0						      |	 btree_gin                   | 1.3
+ dict_xsyn          | 1.0						      |	 btree_gist                  | 1.7
+ earthdistance      | 1.2						      |	 citext                      | 1.6
+ file_fdw           | 1.0						      |	 credcheck                   | 3.0.0
+ fuzzystrmatch      | 1.2						      |	 cube                        | 1.5
+ hstore             | 1.8						      |	 dblink                      | 1.2
+ insert_username    | 1.0						      |	 dict_int                    | 1.0
+ intagg             | 1.1						      |	 dict_xsyn                   | 1.0
+ intarray           | 1.5						      |	 earthdistance               | 1.2
+ isn                | 1.2						      |	 external_search_fdw         | 1.0
+ lo                 | 1.1						      |	 fuzzystrmatch               | 1.2
+ ltree              | 1.3						      |	 g_atomics_benchmark         | 1.0
+ moddatetime        | 1.0						      |	 g_compat                    | 1.0
+ pageinspect        | 1.12						      |	 g_dbg                       | 1.0
+ pg_buffercache     | 1.5						      |	 g_diag                      | 1.0
+ pg_freespacemap    | 1.2						      |	 g_logger                    | 1.0
+ pg_prewarm         | 1.2						      |	 g_memory                    | 1.0
+ pg_stat_statements | 1.11						      |	 g_mintxid                   | 1.0
+ pg_surgery         | 1.0						      |	 g_process_control           | 1.0
+ pg_trgm            | 1.6						      |	 g_space_used_stats          | 1.0
+ pg_visibility      | 1.2						      |	 g_stat_activity             | 1.0
+ pg_walinspect      | 1.1						      |	 g_stats                     | 1.0
+ pgcrypto           | 1.3						      |	 g_tune_gucs                 | 1.0
+ pgrowlocks         | 1.2						      |	 google_columnar_engine      | 1.0
+ pgstattuple        | 1.5						      |	 google_db_advisor           | 1.1
+ plpgsql            | 1.0						      |	 google_insights             | 1.5
+ postgres_fdw       | 1.1						      |	 google_job_scheduler        | 1.0
+ refint             | 1.0						      |	 google_ml_integration       | 1.6
+ seg                | 1.4						      |	 google_pg_auth              | 1.0
+ sslinfo            | 1.2						      |	 google_plan_management      | 1.0
+ tablefunc          | 1.0						      |	 google_storage              | 1.1
+ tcn                | 1.0						      |	 hll                         | 2.18
+ tsm_system_rows    | 1.0						      |	 hstore                      | 1.8
+ tsm_system_time    | 1.0						      |	 hypopg                      | 1.3.2
+ unaccent           | 1.1						      |	 insert_username             | 1.0
+ uuid-ossp          | 1.1						      |	 intagg                      | 1.1
+ xml2               | 1.1						      |	 intarray                    | 1.5
+(45 rows)								      |	 ip4r                        | 2.4
+									      >	 isn                         | 1.2
+									      >	 lo                          | 1.1
+									      >	 ltree                       | 1.3
+									      >	 moddatetime                 | 1.0
+									      >	 pageinspect                 | 1.12
+									      >	 parameterized_views         | 1.0
+									      >	 pg_bigm                     | 1.2
+									      >	 pg_buffercache              | 1.5
+									      >	 pg_cron                     | 1.6.7
+									      >	 pg_freespacemap             | 1.2
+									      >	 pg_hint_plan                | 1.7.0
+									      >	 pg_ivm                      | 1.11
+									      >	 pg_partman                  | 5.4.3
+									      >	 pg_prewarm                  | 1.2
+									      >	 pg_proctab                  | 0.0.10
+									      >	 pg_repack                   | 1.5.2
+									      >	 pg_similarity               | 1.0
+									      >	 pg_squeeze                  | 1.9
+									      >	 pg_stat_statements          | 1.11
+									      >	 pg_surgery                  | 1.0
+									      >	 pg_textsearch               | 1.3.0
+									      >	 pg_trgm                     | 1.6
+									      >	 pg_visibility               | 1.2
+									      >	 pg_wait_sampling            | 1.1
+									      >	 pg_walinspect               | 1.1
+									      >	 pgaudit                     | 17.0
+									      >	 pgcrypto                    | 1.3
+									      >	 pgfincore                   | 1.3.1
+									      >	 pglogical                   | 2.4.6
+									      >	 pglogical_origin            | 1.0.0
+									      >	 pgrowlocks                  | 1.2
+									      >	 pgstattuple                 | 1.5
+									      >	 pgtap                       | 1.3.0
+									      >	 pgtt                        | 4.4.0
+									      >	 plpgsql                     | 1.0
+									      >	 plproxy                     | 2.11.0
+									      >	 plv8                        | 3.2.3
+									      >	 postgres_fdw                | 1.1
+									      >	 prefix                      | 1.2.0
+									      >	 refint                      | 1.0
+									      >	 roaringbitmap               | 0.5
+									      >	 rum                         | 1.3
+									      >	 sslinfo                     | 1.2
+									      >	 tablefunc                   | 1.0
+									      >	 tcn                         | 1.0
+									      >	 temporal_tables             | 1.2.2
+									      >	 tsm_system_rows             | 1.0
+									      >	 tsm_system_time             | 1.0
+									      >	 unaccent                    | 1.1
+									      >	 uuid-ossp                   | 1.1
+									      >	 vector                      | 0.8.2.google-1
+									      >	 vector_assist               | 0.1.0
+									      >	(98 rows)
+
